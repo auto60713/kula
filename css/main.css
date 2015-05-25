@@ -1,0 +1,184 @@
+*{ 
+    margin: 0px; padding: 0px; 
+}
+body {    
+    font-family: "ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","メイリオ",Meiryo,"ＭＳ Ｐゴシック",sans-serif;
+    font-size: 12px;
+    line-height: 18px;
+    color: #686868;
+    border-top: 5px solid #F18CAC;
+    min-width: 1000px;
+    position: relative;
+    overflow-x: hidden;
+}
+input,textarea{
+    font-family: "ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","メイリオ",Meiryo,"ＭＳ Ｐゴシック",sans-serif;
+    font-size: 12px;
+}
+header{
+	margin: 0px auto;
+}
+#back_img{
+	position: absolute;
+	z-index: -1;
+}
+#discussion{    background-color: #F6F6F6;
+    background-image: url("../img/bg_texture.gif");
+    background-repeat: repeat;
+    background-position: left top;
+}
+.ptl-wrapper{
+	width: 1000px;
+    position: relative;
+    margin: 0px auto;
+    display: block;
+    padding-bottom: 100px;
+}
+.ptl-header-top{
+    overflow: hidden;
+    font-size: 10px;
+    margin: 10px 0px 0px;	
+}
+.ptl-header-bottom{
+	clear: both;
+}
+.ptl-logo{
+	width: 247px;
+    height: 63px;
+    padding: 12px 0px 0px;
+    display: inline-block;
+    float: left;
+}
+.ptl-login{
+    padding: 19px 0px 0px;
+    float: right;
+    text-align: right;
+    word-wrap: break-word;
+
+}
+.ptl-login-btn{
+border-radius: 3px;
+    cursor: pointer;
+    margin-left:10px;
+    float: left;
+    text-align: left;
+    width: 100px;
+    height: 27px;
+    background-image: url("../img/hdr_bt_login.png");
+    background-repeat:no-repeat;
+}
+.ptl-login-btn:hover{
+    opacity: 0.7;
+}
+.ptl-login-btn h2{
+    color: #FFFFFF;
+    font-size: 14px;
+    margin-left: 30px; 
+    line-height: 27px;
+}
+#menu{
+	clear: both;
+    height: 44px;
+    margin: 0px 0px 16px;
+}
+#menu ul{
+    list-style: outside none none;
+}
+#menu ul li{
+    float: left;
+    display: inline-block;
+}
+
+footer{
+	width: 100%;
+	display: block;
+}
+.ptl-footer-nav{
+	display: block;
+    padding: 10px 0px;
+    background: #FFF none repeat scroll 0% 0%;
+}
+.ptl-sub-title{
+    height: 44px;
+    background-repeat:no-repeat;
+    margin: 0px 0px 15px;
+    font-size: 18px;
+    font-family: "webfont";
+    font-weight: normal;
+}
+.ptl-sub-title h2{
+    line-height: 40px;
+    margin-left:46px; 
+    font-size: 16px;
+    color: #7F7F7F;
+    font-weight: bold;
+}
+.ptl-copyright{
+    padding: 20px 0px;
+    position: relative;
+    margin: 0px auto;
+	width: 100%;
+    text-align: center;
+    background-color: #FFFFFF;
+}
+.albums{
+     white-space: nowrap; 
+     width: 100%;
+     overflow: hidden;
+         text-overflow: ellipsis; 
+}
+.albums a{
+    color: #5FABBF;
+    text-decoration: none;
+}
+.albums a:hover{
+    color: #80D5EB;
+}
+.ptl-under{
+	position: relative;
+    background-color: #FFFFFF;
+    height: 500px;
+    margin: 0px 0px 20px;
+    border-bottom: 5px solid #67BCC9;
+}
+.newarrival{
+	width: 750px;
+    background-image: url("../img/newarrival_bg.jpg");
+    background-repeat: repeat;
+    background-position: left top;
+    margin: 0px auto 20px;
+    padding-top: 15px;
+    padding-bottom: 20px;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+}
+.ptl-content{
+	display: block;
+	margin: 0px 0px 60px;
+}
+.ptl-main{
+	float: left;
+    width: 750px;
+}
+.ptl-right-side {
+    float: right;
+}
+.ptl-sub{
+border-radius: 5px;
+	background-color: #FFFFFF;
+    margin: 0px 0px 20px;
+    padding: 10px;
+    border-right: 1px solid #E8E8E8;
+    border-bottom: 1px solid #DCE0E6;
+}
+.ptl-side-contents{
+border-radius: 5px;
+	width: 200px;
+    margin: 0px 0px 20px;
+    padding: 15px;
+    background: #FFF none repeat scroll 0% 0%;
+    border-right: 1px solid #E8E8E8;
+    border-bottom: 1px solid #DCE0E6;
+}
+.ptl-sub-content{    
+    padding: 0px 10px;
+}

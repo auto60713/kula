@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+    <title>Title of the document</title>
+    <link rel=stylesheet type="text/css" href="css/main.css"> 
+    <!-- https://www.otanko-nurse.jp/ -->
+    <!-- https://www.otanko-nurse.jp/onayami/ -->
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery-migrate.js"></script>
+    <!-- https://www.otanko-nurse.jp/ -->
+    <!-- https://www.otanko-nurse.jp/onayami/ -->
+    <script>
+    $(function(){   
+        $( "header" ).load("view/header.html");
+        $( "#menu"  ).load("view/menu.html");
+        $( "footer" ).load("view/footer.html");
+    })
+    </script>
+
+</head>
+<style>
+.ptl-sub-title{
+    background-image: url("img/category_list_long.gif");
+}
+
+
+.ptl-sub-content{
+    
+    min-height: 400px;
+}
+form{
+    width: 350px;
+    margin: 0px auto;
+    padding-top: 100px;
+}
+.submit{
+    display: inline-block;
+    cursor: pointer;
+
+    border:#7F7F7F 1px solid; 
+color:#666666;
+
+
+    margin-top: 20px; 
+padding: 0 5px;
+}
+input{
+    margin-left: 10px;
+}
+</style>
+<body id="discussion">
+<img src="img/hdr_bg.jpg" alt="おたんこナース" id="back_img">
+
+<div class="ptl-wrapper">
+
+	<header></header>
+	<nav id="menu"></nav>
+
+<div class="ptl-content">
+
+	<div class="ptl-sub">
+		<div class="ptl-sub-title"><h2>註冊</h2></div>
+        <div class="ptl-sub-content">
+        <!-- {帳號,密碼,暱稱,簡短介紹} -->
+        <form action="action_page.php">
+        <table>
+            <tr><td>帳號</td>      <td><input type="text" name="id"></td></tr>
+            <tr><td>密碼</td>      <td><input type="text" name="pw"></td></tr>
+            <tr><td>再一次密碼</td><td><input type="text" name="pw2"></td></tr>
+            <tr><td>暱稱</td>      <td><input type="text" name="name"></td></tr>
+            <tr><td>簡短介紹</td>  <td><input type="text" name="about"></td></tr>
+        </table> 
+            <span class="submit">送出</span>
+        </form> 
+
+	    </div>
+	</div>
+
+   <div style="clear: both;"></div> 
+</div>
+</div>
+
+
+<footer></footer>
+</body>
+</html> 

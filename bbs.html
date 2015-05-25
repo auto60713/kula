@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+    <title>Title of the document</title>
+    <link rel=stylesheet type="text/css" href="css/main.css"> 
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery-migrate.js"></script>
+    <!-- https://www.otanko-nurse.jp/ -->
+    <!-- https://www.otanko-nurse.jp/onayami/ -->
+    <script>
+    $(function(){   
+        $( "header" ).load("view/header.html");
+        $( "#menu"  ).load("view/menu.html");
+        $( "footer" ).load("view/footer.html");
+    })
+    </script>
+
+</head>
+<style>
+.ptl-sub-title{
+    background-image: url("img/category_list.gif");
+}
+.ptl-side-contents h1{
+    margin-bottom: 15px; 
+}
+
+.search-submit{
+margin-top: 15px;
+cursor: pointer;
+
+    text-align: center;
+    border:#7F7F7F 1px solid; 
+color:#666666;
+
+
+padding: 2px;
+width: 60px;
+margin-left: 10px; 
+}
+
+input{
+  width: 100%;
+}
+
+.house{
+    border-bottom:#BFBFBF 1px solid; 
+    overflow: hidden;
+}
+.house-header{
+    margin-top: 6px;
+}
+/* 需要用JS 調整比例 */
+.house-cover{
+float: left;
+width: 150px;
+ height: 100px;
+margin:5px; 
+overflow: hidden;
+}
+
+
+.house-host,.house-title{
+    font-size: 16px;
+}
+.house-title{
+  color: #5FABBF;
+}
+.house-host{
+    color: #E881AF;
+}
+.house-date{
+    float: right;
+}
+.house-cont{
+margin-top: 10px;
+overflow: hidden;
+height: 54px;
+}
+</style>
+<body id="discussion">
+<img src="img/hdr_bg.jpg" alt="おたんこナース" id="back_img">
+
+<div class="ptl-wrapper">
+
+	<header></header>
+	<nav id="menu"></nav>
+
+
+
+
+<div class="ptl-content">
+
+    <div class="ptl-main">
+
+	<div class="ptl-sub">
+		<div class="ptl-sub-title"><h2>討論區</h2></div>
+        <div class="ptl-sub-content">
+            <div class="house">
+
+               <div class="house-cover"><img src="test/ac05.jpg"></div>
+               <div class="house-header">       
+                   <span class="house-host">統神</span>
+                   <span class="house-title">千尋x在地下城尋求邂逅是否搞錯了什麼─赫斯緹雅</span>
+                   <span class="house-date">2015-5-25更新</span>
+               </div>  
+               <div class="house-cont">盡在不言中W<br>
+               這是我14年前的衣服那是一個大家出角都是對角色有愛的年代<br>
+               所以也不太會考慮到適不適合這個問題多年以後<br>我就會想問自己為什麼覺得自己可以出少女啊XD!!!!<br>
+               我瘦的時候比現在看起來還MAN啊XD!!!!還好這件的腰是鬆緊帶我還能穿她!
+               </div>
+               <div style="clear:both;"></div>
+            </div>
+
+            <div class="house">
+
+               <div class="house-cover"><img src="test/ac03.jpg"></div>
+               <div class="house-header">       
+                   <span class="house-host">統神</span>
+                   <span class="house-title">我的電弧女巫才沒那麼可愛!</span>
+                   <span class="house-date">2015-5-25更新</span>
+               </div>  
+               <div class="house-cont">盡在不言中W<br>
+               這是我14年前的衣服那是一個大家出角都是對角色有愛的年代<br>
+               所以也不太會考慮到適不適合這個問題多年以後<br>我就會想問自己為什麼覺得自己可以出少女啊XD!!!!<br>
+               我瘦的時候比現在看起來還MAN啊XD!!!!還好這件的腰是鬆緊帶我還能穿她!
+               </div>
+               <div style="clear:both;"></div>
+            </div>
+
+            <div class="house">
+
+               <div class="house-cover"><img src="test/ac06.jpg"></div>
+               <div class="house-header">       
+                   <span class="house-host">統神</span>
+                   <span class="house-title">我的電弧女巫才沒那麼可愛!</span>
+                   <span class="house-date">2015-5-25更新</span>
+               </div>  
+               <div class="house-cont">盡在不言中W<br>
+               這是我14年前的衣服那是一個大家出角都是對角色有愛的年代<br>
+               所以也不太會考慮到適不適合這個問題多年以後<br>我就會想問自己為什麼覺得自己可以出少女啊XD!!!!<br>
+               我瘦的時候比現在看起來還MAN啊XD!!!!還好這件的腰是鬆緊帶我還能穿她!
+               </div>
+               <div style="clear:both;"></div>
+            </div>
+         
+	    </div>
+	</div>
+
+    </div>	
+
+    <div class="ptl-right-side">
+    	<div class="ptl-side-contents">
+ 
+            <h1>搜尋暱稱</h1>
+            <input type="text" name="id">
+    	</div>
+
+    </div>
+    <div style="clear: both;"></div> 
+</div>
+
+
+
+</div>
+
+
+<footer></footer>
+</body>
+<script type="text/javascript">
+
+//照片resize
+$( ".house-cover img" ).load(function() {
+  if($( this ).width() > $( this ).height()) $( this ).css( "height", "100%" );
+  else $( this ).css( "width", "100%" );
+});
+
+</script>
+</html> 

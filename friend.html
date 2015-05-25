@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+    <title>Title of the document</title>
+    <link rel=stylesheet type="text/css" href="css/main.css"> 
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery-migrate.js"></script>
+    <!-- https://www.otanko-nurse.jp/ -->
+    <!-- https://www.otanko-nurse.jp/onayami/ -->
+    <script>
+    $(function(){   
+        $( "header" ).load("view/header.html");
+        $( "#menu"  ).load("view/menu.html");
+        $( "footer" ).load("view/footer.html");
+    })
+    </script>
+
+</head>
+<style>
+.ptl-sub-title{
+    background-image: url("img/category_list.gif");
+}
+.ptl-side-contents h1{
+    margin-bottom: 15px; 
+}
+
+.search-submit{
+margin-top: 15px;
+cursor: pointer;
+
+    text-align: center;
+    border:#7F7F7F 1px solid; 
+color:#666666;
+
+
+padding: 2px;
+width: 60px;
+margin-left: 10px; 
+}
+input{
+  width: 100%;
+}
+
+</style>
+<body id="discussion">
+<img src="img/hdr_bg.jpg" alt="おたんこナース" id="back_img">
+
+<div class="ptl-wrapper">
+
+	<header></header>
+	<nav id="menu"></nav>
+
+
+
+
+<div class="ptl-content">
+
+    <div class="ptl-main">
+
+	<div class="ptl-sub">
+		<div class="ptl-sub-title"><h2>好友列表</h2></div>
+        <div class="ptl-sub-content">
+<p>尚未開放!</p>
+
+          <div style="clear:both; height:20px;"></div>
+	    </div>
+	</div>
+
+    </div>	
+
+    <div class="ptl-right-side">
+    	<div class="ptl-side-contents">
+ <h1>搜尋暱稱</h1>
+            <input type="text" name="id">
+    	</div>
+
+    </div>
+    <div style="clear: both;"></div> 
+</div>
+
+
+
+</div>
+
+
+<footer></footer>
+</body>
+
+</html> 

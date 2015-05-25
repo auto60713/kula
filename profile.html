@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+    <title>Title of the document</title>
+    <link rel=stylesheet type="text/css" href="css/main.css"> 
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery-migrate.js"></script>
+    <!-- https://www.otanko-nurse.jp/ -->
+    <!-- https://www.otanko-nurse.jp/onayami/ -->
+    <script>
+    $(function(){   
+        $( "header" ).load("view/header.html");
+        $( "#menu"  ).load("view/menu.html");
+        $( "footer" ).load("view/footer.html");
+    })
+    </script>
+
+</head>
+<style>
+.ptl-sub-title{
+    background-image: url("img/category_list.gif");
+}
+
+
+.ptl-side-contents h1{
+    margin-bottom: 15px; 
+}
+/* 需要用到JS調整 */
+.face-photo{
+    width: 140px;
+    height: 140px;
+    overflow: hidden;
+}
+.my-name{
+    color: #E881AF;
+       margin: 5px 0px;
+}
+.space-hr{
+       height: 1px;
+       opacity: 0.3;
+       margin-bottom: 5px;
+}
+.title-input{
+    height: 18px;
+}
+.article_date{
+    color: #6BBBD0;
+    padding-bottom: 10px;
+}
+.article_text_input{
+    margin-top: 5px; 
+    width: 100%;
+    height: 40px;
+    resize: vertical;
+}
+.article_photo{
+   float: left;
+   width: 235px;
+   height: 235px;
+   overflow: hidden;
+   text-align: center;
+       margin-top: 10px;
+}
+
+.unlast{
+    margin-right: 10px;
+}
+.submit{
+    display: inline-block;
+
+    cursor: pointer;
+
+    text-align: center;
+    border:#7F7F7F 1px solid; 
+color:#666666;
+
+margin-top: 5px; 
+    margin-right: 5px; 
+padding: 0 5px;
+}
+.po-article{
+    height: 45px;
+    overflow: hidden;
+}
+.po-article:hover{
+   opacity: 0.7;
+}
+</style>
+<body id="discussion">
+<img src="img/hdr_bg.jpg" alt="おたんこナース" id="back_img">
+
+<div class="ptl-wrapper">
+
+	<header></header>
+	<nav id="menu"></nav>
+
+
+
+
+<div class="ptl-content">
+
+    <div class="ptl-main">
+
+	<div class="ptl-sub po-article">
+		<div class="ptl-sub-title"><h2>發文</h2></div>
+        <div class="ptl-sub-content">
+            <input type="text" name="title" class="title-input" placeholder="主題">
+            <span class="submit">送出</span><span class="submit">上傳相片</span>
+            <textarea class="article_text_input" placeholder="內文"></textarea> 
+       
+	    </div>
+	</div>
+
+    <div class="ptl-sub">
+        <div class="article_date">
+            <h2>千尋x在地下城尋求邂逅是否搞錯了什麼─赫斯緹雅</h2>
+            <span>2015-5-25│5:24 PM</span>
+        </div>
+        <p>
+盡在不言中W
+這是我14年前的衣服<br>
+那是一個大家出角都是對角色有愛的年代<br>
+
+        </p>
+
+       <div class="article_photo unlast"><img src="test/ac07.jpg"></div>
+       <div class="article_photo unlast"><img src="test/ac08.jpg"></div>
+       <div class="article_photo"><img src="test/ac09.jpg"></div>
+       <div style="clear:both;"></div>
+    </div>
+
+        <div class="ptl-sub">
+        <div class="article_date">
+            <h2>千尋x在地下城尋求邂逅是否搞錯了什麼─赫斯緹雅</h2>
+            <span>2015-5-25│5:24 PM</span>
+        </div>
+        <p>
+盡在不言中W
+這是我14年前的衣服<br>
+那是一個大家出角都是對角色有愛的年代<br>
+所以也不太會考慮到適不適合這個問題<br>
+多年以後，我就會想問自己為什麼覺得自己可以出少女啊XD!!!!<br>
+我瘦的時候比現在看起來還MAN啊XD!!!!<br>
+還好這件的腰是鬆緊帶我還能穿她!<br>
+不過腰帶就改成綁帶的了OTZ<br>
+把一些現在的眼光看來可以改進的地方改了一下<br>
+我也已經是可以自己處理衣服的COSER了<br>
+假髮當年是用黑色的半頂<br>
+現在就換成比較娃娃風的棕色<br>
+原圖是黑白的<br>
+        </p>
+
+       <div class="article_photo unlast"><img src="test/ac11.jpg"></div>
+       <div class="article_photo unlast"><img src="test/ac12.jpg"></div>
+       <div style="clear:both;"></div>
+    </div>
+
+    </div>	
+
+
+
+
+
+
+
+    <div class="ptl-right-side">
+    	<div class="ptl-side-contents">
+    	<h1>關於</h1>
+            <div class="face-photo"><img src="test/ac08.jpg" alt=""></div>
+            <p class="my-name">暱稱：統神</p>
+            <hr class="space-hr">
+            <p>出照進度超悲劇的我終於要來發這篇被放置了半個多月的覺醒旗袍團了
+               森君一直都是個懶惰的人+上近幾年成為懶於拓展人際關係的廢宅
+               所以很久沒有在網路上跟團了
+            </p>
+    	</div>
+
+        <div class="ptl-side-contents">
+        <h1>文章</h1>
+        <!-- 這裡要做的是only jquery 某篇文章 -->
+            <p class="albums"><a href="#">千尋x在地下城尋求邂逅是否搞錯了什麼─赫斯緹雅</a></p>
+        </div>
+
+        <div class="ptl-side-contents">
+        <h1>相片</h1>
+            <p class="albums"><a href="photo.html">所有相片</a></p>
+        </div>
+
+    </div>
+    <div style="clear: both;"></div> 
+</div>
+
+
+
+</div>
+
+
+<footer></footer>
+</body>
+<script type="text/javascript">
+
+//照片resize
+$( ".article_photo img,.face-photo img" ).load(function() {
+  if($( this ).width() > $( this ).height()) $( this ).css( "height", "100%" );
+  else $( this ).css( "width", "100%" );
+});
+
+$( ".ptl-sub-title" ).click(function() {
+  $( ".po-article" ).removeClass('po-article');
+});
+
+
+</script>
+</html> 

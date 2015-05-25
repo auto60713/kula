@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+    <title>Title of the document</title>
+    <link rel=stylesheet type="text/css" href="css/main.css"> 
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery-migrate.js"></script>
+    <!-- https://www.otanko-nurse.jp/ -->
+    <!-- https://www.otanko-nurse.jp/onayami/ -->
+    <script>
+    $(function(){   
+        $( "header" ).load("view/header.html");
+        $( "#menu"  ).load("view/menu.html");
+        $( "footer" ).load("view/footer.html");
+    })
+    </script>
+
+</head>
+<style>
+.ptl-sub-title{
+    background-image: url("img/category_list.gif");
+}
+.ptl-side-contents h1{
+    margin-bottom: 15px; 
+}
+
+.photo-box{
+float: left;
+overflow: hidden;
+    width: 164px;
+    height: 160px;
+    margin-top: 10px;
+    border:#C0C0C0 1px solid; 
+    text-align: center;
+}
+.unlast{
+        margin-right: 10px;
+
+}
+</style>
+<body id="discussion">
+<img src="img/hdr_bg.jpg" alt="おたんこナース" id="back_img">
+
+<div class="ptl-wrapper">
+
+	<header></header>
+	<nav id="menu"></nav>
+
+
+
+
+<div class="ptl-content">
+
+    <div class="ptl-main">
+
+	<div class="ptl-sub">
+		<div class="ptl-sub-title"><h2>千尋x在地下城尋求邂逅是否搞錯了什麼─赫斯緹雅</h2></div>
+        <div class="ptl-sub-content">
+
+        <p>
+盡在不言中W
+這是我14年前的衣服<br>
+那是一個大家出角都是對角色有愛的年代<br>
+所以也不太會考慮到適不適合這個問題<br>
+多年以後，我就會想問自己為什麼覺得自己可以出少女啊XD!!!!<br>
+我瘦的時候比現在看起來還MAN啊XD!!!!<br>
+還好這件的腰是鬆緊帶我還能穿她!<br>
+不過腰帶就改成綁帶的了OTZ<br>
+把一些現在的眼光看來可以改進的地方改了一下<br>
+我也已經是可以自己處理衣服的COSER了<br>
+假髮當年是用黑色的半頂<br>
+現在就換成比較娃娃風的棕色<br>
+原圖是黑白的<br>
+
+        </p>
+
+        <div class="photo-box unlast"><img src="test/ac03.jpg" alt=""></div>
+        <div class="photo-box unlast"><img src="test/ac04.jpg" alt=""></div>
+        <div class="photo-box unlast"><img src="test/ac05.jpg" alt=""></div>
+        <div class="photo-box"><img src="test/ac06.jpg" alt=""></div>
+        <div class="photo-box unlast"><img src="test/ac07.jpg" alt=""></div>
+        <div class="photo-box unlast"><img src="test/ac08.jpg" alt=""></div>
+        <div class="photo-box unlast"><img src="test/ac09.jpg" alt=""></div>
+
+        <div style="clear:both; height:20px;"></div>
+
+	    </div>
+	</div>
+
+    </div>	
+
+    <div class="ptl-right-side">
+    	<div class="ptl-side-contents">
+    	<h1>統神的相片</h1> 
+            <p class="albums"><a href="#">全部</p></a>
+            <p class="albums"><a href="#">千尋x在地下城尋求邂逅是否搞錯了什麼─赫斯緹雅</a></p>
+    	</div>
+
+    </div>
+    <div style="clear: both;"></div> 
+</div>
+
+
+
+</div>
+
+
+<footer></footer>
+</body>
+<script type="text/javascript">
+
+//照片resize
+$( ".photo-box img" ).load(function() {
+  if($( this ).width() > $( this ).height()) $( this ).css( "height", "100%" );
+  else $( this ).css( "width", "100%" );
+});
+
+</script>
+</html> 
