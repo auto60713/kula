@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <title>Title of the document</title>
     <link rel=stylesheet type="text/css" href="css/main.css"> 
     <script src="js/jquery.js"></script>
     <script src="js/jquery-migrate.js"></script>
+    <script src="js/jquery.form.min.js"></script>
     <!-- https://www.otanko-nurse.jp/ -->
     <!-- https://www.otanko-nurse.jp/onayami/ -->
     <script>
@@ -13,6 +14,12 @@
         $( "header" ).load("view/header.html");
         $( "#menu"  ).load("view/menu.html");
         $( "footer" ).load("view/footer.html");
+
+        $.get( "php/login_check.php", function( data ) {
+
+          if(data != '')  $('.ptl-wrapper').css("opacity",1);
+          else document.location.href="index.html";
+        });
     })
     </script>
 
@@ -21,12 +28,9 @@
 .ptl-sub-title{
     background-image: url("img/category_list.gif");
 }
-
-
 .ptl-side-contents h1{
     margin-bottom: 15px; 
 }
-/* 需要用到JS調整 */
 .face-photo{
     width: 140px;
     height: 140px;
@@ -34,57 +38,77 @@
 }
 .my-name{
     color: #E881AF;
-       margin: 5px 0px;
+    margin: 5px 0px;
 }
 .space-hr{
-       height: 1px;
-       opacity: 0.3;
-       margin-bottom: 5px;
+    height: 1px;
+    opacity: 0.3;
+    margin-bottom: 5px;
 }
-.title-input{
+.article-title-input{
     height: 18px;
 }
-.article_date{
-    color: #6BBBD0;
-    padding-bottom: 10px;
-}
-.article_text_input{
+.article-cont-input{
     margin-top: 5px; 
     width: 100%;
     height: 40px;
     resize: vertical;
 }
+
+.article_date{
+    color: #6BBBD0;
+    padding-bottom: 10px;
+}
 .article_photo{
-   float: left;
-   width: 235px;
-   height: 235px;
-   overflow: hidden;
-   text-align: center;
-       margin-top: 10px;
+    float: left;
+    width: 235px;
+    height: 235px;
+    overflow: hidden;
+    text-align: center;
+    margin-top: 10px;
+}
+.article_photo_min{
+    display: inline-block;
+    width: 140px;
+    height: 140px;
+    overflow: hidden;
+    text-align: center;
+    margin-top: 10px;
+}
+.photo_box{
+  width: 100%;
+  overflow-x: auto; 
+  white-space: nowrap;
+  padding: 0 10px;
 }
 
+.po-echo{
+    line-height: 140px;
+}
 .unlast{
     margin-right: 10px;
 }
 .submit{
-    display: inline-block;
+    display: inline;
     cursor: pointer;
-
     text-align: center;
     border:#7F7F7F 1px solid; 
-color:#666666;
-
-margin-top: 5px; 
+    color:#666666;
+    margin-top: 5px; 
     margin-right: 5px; 
-padding: 0 5px;
+    padding: 0 5px;
 }
 .po-article{
     height: 45px;
     overflow: hidden;
 }
 .po-article:hover{
-   opacity: 0.7;
+    opacity: 0.7;
 }
+form{
+    float: left;
+}
+
 </style>
 <body id="discussion">
 <img src="img/hdr_bg.jpg" alt="おたんこナース" id="back_img">
@@ -99,64 +123,40 @@ padding: 0 5px;
 
 <div class="ptl-content">
 
-    <div class="ptl-main">
+  <div class="ptl-main">
 
-	<div class="ptl-sub po-article">
+	<div class="ptl-sub po-article po-sub">
 		<div class="ptl-sub-title"><h2>發文</h2></div>
         <div class="ptl-sub-content">
-            <input type="text" name="title" class="title-input" placeholder="主題">
+            <input type="text" name="title" class="article-title-input" placeholder="主題">
             <span class="submit">送出</span>上傳相片
-            <input type="file" name="face_photo" id="face_photo">
-            <textarea class="article_text_input" placeholder="內文"></textarea> 
+            <form action="php/ajax_photo_upload.php" enctype="multipart/form-data" method="post" id="art_img_form">
+            <input type="file" name="photo[]" id="art_img" multiple>
+            </form>
+            <textarea class="article-cont-input" placeholder="內文"></textarea> 
        
 	    </div>
+      <div class="photo_box"></div>
 	</div>
 
-    <div class="ptl-sub">
+    <!--div class="ptl-sub">
         <div class="article_date">
             <h2>千尋x在地下城尋求邂逅是否搞錯了什麼─赫斯緹雅</h2>
             <span>2015-5-25│5:24 PM</span>
         </div>
         <p>
-盡在不言中W
-這是我14年前的衣服<br>
-那是一個大家出角都是對角色有愛的年代<br>
-
+        盡在不言中W 這是我14年前的衣服<br>
+        那是一個大家出角都是對角色有愛的年代<br>
         </p>
 
        <div class="article_photo unlast"><img src="test/ac07.jpg"></div>
        <div class="article_photo unlast"><img src="test/ac08.jpg"></div>
        <div class="article_photo"><img src="test/ac09.jpg"></div>
        <div style="clear:both;"></div>
-    </div>
+    </div-->
 
-        <div class="ptl-sub">
-        <div class="article_date">
-            <h2>我的電弧女巫才沒那麼可愛!</h2>
-            <span>2015-5-25│5:24 PM</span>
-        </div>
-        <p>
-盡在不言中W
-這是我14年前的衣服<br>
-那是一個大家出角都是對角色有愛的年代<br>
-所以也不太會考慮到適不適合這個問題<br>
-多年以後，我就會想問自己為什麼覺得自己可以出少女啊XD!!!!<br>
-我瘦的時候比現在看起來還MAN啊XD!!!!<br>
-還好這件的腰是鬆緊帶我還能穿她!<br>
-不過腰帶就改成綁帶的了OTZ<br>
-把一些現在的眼光看來可以改進的地方改了一下<br>
-我也已經是可以自己處理衣服的COSER了<br>
-假髮當年是用黑色的半頂<br>
-現在就換成比較娃娃風的棕色<br>
-原圖是黑白的<br>
-        </p>
 
-       <div class="article_photo unlast"><img src="test/ac11.jpg"></div>
-       <div class="article_photo unlast"><img src="test/ac12.jpg"></div>
-       <div style="clear:both;"></div>
-    </div>
-
-    </div>	
+  </div>	
 
 
 
@@ -167,19 +167,16 @@ padding: 0 5px;
     <div class="ptl-right-side">
     	<div class="ptl-side-contents">
     	<h1>關於</h1>
-            <div class="face-photo"><img src="test/ac08.jpg" alt=""></div>
-            <p class="my-name">暱稱：統神</p>
+            <div class="face-photo"><img src="" alt="" class="my-photo"></div>
+            <p class="my-name"></p>
             <hr class="space-hr">
-            <p>出照進度超悲劇的我終於要來發這篇被放置了半個多月的覺醒旗袍團了
-               森君一直都是個懶惰的人+上近幾年成為懶於拓展人際關係的廢宅
-               所以很久沒有在網路上跟團了
-            </p>
+            <p class="my-signature"></p>
     	</div>
 
-        <div class="ptl-side-contents">
+        <div class="ptl-side-contents art-index">
         <h1>文章</h1>
         <!-- 這裡要做的是only jquery 某篇文章 -->
-            <p class="albums"><a href="#">千尋x在地下城尋求邂逅是否搞錯了什麼─赫斯緹雅</a></p>
+            <!--p class="albums"><a href="#">千尋x在地下城尋求邂逅是否搞錯了什麼─赫斯緹雅</a></p-->
         </div>
 
         <div class="ptl-side-contents">
@@ -200,14 +197,132 @@ padding: 0 5px;
 </body>
 <script type="text/javascript">
 
+var all_photo_no = "";
+
 //照片resize
-$( ".article_photo img,.face-photo img" ).load(function() {
+$( ".face-photo img" ).load(function() {
   if($( this ).width() > $( this ).height()) $( this ).css( "height", "100%" );
   else $( this ).css( "width", "100%" );
 });
 
+//發文展開
 $( ".ptl-sub-title" ).click(function() {
   $( ".po-article" ).removeClass('po-article');
+});
+
+//個人資料
+$.get( "php/get_my_detail.php", function( data ) {
+
+    var json = JSON.parse(data);
+
+    $('.my-photo').attr( "src",json.photo );
+    $('.my-name').text( json.name );
+    $('.my-signature').text( json.signature );
+});
+
+//所有文章
+$.get( "php/get_my_article.php", function( data ) {
+
+    var json = JSON.parse(data);
+
+    for (var i=0; i<json.length; i++) {
+
+      var title = $('<h2>').text(json[i].title),
+          datetime = $('<span>').text(json[i].datetime),
+          article_data = $('<div>').addClass('article_date').append(title,datetime),
+          cont = $('<p>').html(json[i].cont),
+
+          post = $('<div>').addClass('ptl-sub this-article').append(article_data,cont);
+          $('.ptl-main').append(post);
+
+      var link = $('<a>').attr("href","#").text(json[i].title),
+          album = $('<p>').addClass('albums').append(link);
+          $('.art-index').append(album);
+
+    //文章照片      
+    $.ajax({
+      type: 'POST',
+      url: 'php/ajax_query.php',
+      async: false,
+      data:{mode:3,article_no:json[i].no},
+      success: function (data) { 
+
+          var photo = JSON.parse(data);
+
+          for (var i=0; i<photo.length; i++) {
+
+              if(i==3) break;
+
+              var img = $('<img>').attr("src",photo[i].photo_path).load(function(){
+                      if($( this ).width() > $( this ).height()) $( this ).css( "height", "100%" );
+                      else $( this ).css( "width", "100%" );
+                  }),
+                  photo_box = $('<div>').addClass('article_photo').append(img);
+              if(i!=2) photo_box.addClass('unlast');
+
+              $('.this-article').append(photo_box);
+
+          }
+          $('.this-article').append($('<div>').css("clear","left"));
+          $('.this-article').removeClass('this-article');
+          
+      }
+    });
+
+
+
+    }
+   
+});
+
+//上傳照片
+$("#art_img").change( ajs_upload );
+
+function ajs_upload(){ 
+
+  $("#art_img_form").ajaxSubmit({
+  type: 'POST',
+  data: {mode:"article"},
+  success: function(resp,st,xhr,$form){  
+  if($.trim(resp.split(",")[0])!="err"){ 
+
+      var img_ary = resp.split(",");
+      for (var i=0; i<img_ary.length-1; i++) {
+
+        var img = $('<img>').attr("src",img_ary[i]).load(function(){
+                      if($( this ).width() > $( this ).height()) $( this ).css( "height", "100%" );
+                      else $( this ).css( "width", "100%" );
+                  }),
+            img_box = $('<div>').addClass('article_photo_min unlast').append(img);
+
+        $('.photo_box').append(img_box);
+
+      }
+     
+      var all_photo = resp.split(","); 
+      all_photo_no = all_photo[all_photo.length-1];
+
+  } else alert(resp.split(",")[1]);
+  }   
+  });  
+
+}
+
+
+//發文
+$( ".submit" ).click(function(){
+
+     var title = $( ".article-title-input" ).val(),
+         cont = $( ".article-cont-input" ).val();
+
+     $.ajax({
+      type: 'POST',
+      url: 'php/ajax_query.php',
+      data:{mode:2,title:title,cont:cont,photo:all_photo_no},
+      success: function (data) { 
+          
+      }
+      });
 });
 
 

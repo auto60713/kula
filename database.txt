@@ -1,1 +1,3 @@
-member{no,id,pw,name,signature,pic}
+member{no,id,pw,name,signature,photo}
+article{no,author,title,datetime,cont}
+photo{no,author,article_no,article_title,photo_path}

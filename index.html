@@ -13,9 +13,18 @@
         $( "header" ).load("view/header.html");
         $( "#menu"  ).load("view/menu.html");
         $( "footer" ).load("view/footer.html");
+
+        $.get( "php/login_check.php", function( data ) {
+
+          if(data == ''){
+
+              $('.ptl-wrapper').css("opacity",1);
+              $('.ptl-header-bottom a,li a').attr("href","#");
+          }
+          else document.location.href="bbs.html";
+        });
     })
     </script>
-
 </head>
 <style>
 .ptl-sub-title{
@@ -40,7 +49,7 @@ margin-left: 10px;
 
 }
 
-.login-submit{
+.btn{
 display: inline-block;
 cursor: pointer; 
 border:#7F7F7F 1px solid; 
@@ -57,13 +66,16 @@ margin-left: 10px;
 	overflow: hidden;
 	border-radius:5px;
 	position: relative;
-    background-color: #FFA6B0;
     height: 360px;
     margin: 0px 0px 20px;
 }
 .ptl-mainvisual img{
 margin-top:-100px; 
 	width: 101%;
+}
+.log{
+    margin-left: 30px;
+    color: #FF8491;
 }
 </style>
 <body id="discussion">
@@ -89,7 +101,7 @@ margin-top:-100px;
 	<div class="ptl-sub">
 		<div class="ptl-sub-title"><h2>提示</h2></div>
         <div class="ptl-sub-content">
-        <p>本網站的內容為cosplay,如果有意願加入我們請登入或註冊。<br>
+        <p>本網站的內容為cosplay, 需要登入才能觀看, 如有意願請先註冊。<br>
         </p>
 	    </div>
 	</div>
@@ -100,9 +112,10 @@ margin-top:-100px;
     	<div class="ptl-side-contents" id="login_box">
     	<h1>登入</h1>
             <p>帳號 <input type="text" name="id"></p>
-            <p>密碼 <input type="text" name="id"></p>
-            <span class="login-submit">確定</span>
-            <a href="register.html"><span class="login-submit">註冊</span></a>
+            <p>密碼 <input type="password" name="pw"></p>
+            <span class="login-submit btn">確定</span>
+            <a href="register.html"><span class="btn">註冊</span></a>
+            <span class="log"></span>
             <div style="clear:both;"></div>
     	</div>
     </div>
@@ -116,5 +129,40 @@ margin-top:-100px;
 
 <footer></footer>
 </body>
+<script>
+
+$(document).bind('keydown',function(event){
+  if(event.keyCode==13) $( ".login-submit" ).click();
+});
+
+    
+$( ".login-submit" ).click(function(event) {
+
+if( !$('input[name=id]').val() ) $('.log').text("請輸入帳號"); 
+else{ 
+if( !$('input[name=pw]').val() ) $('.log').text("請輸入密碼");
+else{
+    
+  var id = $('input[name=id]').val(),
+      pw = $('input[name=pw]').val();
+
+  $.ajax({
+      type: 'POST',
+      url: 'php/login.php',
+      data: {id:id,pw:pw},
+      success: function (data) { 
+
+          if($.trim(data)=="success") {
+              document.location.href="profile.html";
+          }
+          else $('.log').text(data);
+      }
+  });
+
+}
+}
+});
+
+</script>
 
 </html> 

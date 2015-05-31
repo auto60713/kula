@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <title>Title of the document</title>
     <link rel=stylesheet type="text/css" href="css/main.css"> 
     <script src="js/jquery.js"></script>
     <script src="js/jquery-migrate.js"></script>
+    <script src="js/jquery.form.min.js"></script>
     <!-- https://www.otanko-nurse.jp/ -->
     <!-- https://www.otanko-nurse.jp/onayami/ -->
     <script>
@@ -13,35 +14,29 @@
         $( "header" ).load("view/header.html");
         $( "#menu"  ).load("view/menu.html");
         $( "footer" ).load("view/footer.html");
+
+        $.get( "php/login_check.php", function( data ) {
+
+          if(data != '') $('.ptl-wrapper').css("opacity",1);
+          else document.location.href="index.html";
+        });
     })
     </script>
-
 </head>
 <style>
 .ptl-sub-title{
     background-image: url("img/category_list_long.gif");
 }
-
-
 .ptl-sub-content{
-    
     min-height: 400px;
 }
-form{
-    width: 350px;
-    margin: 0px auto;
-    padding-top: 100px;
-}
-.submit{
+#submit{
     display: inline-block;
     cursor: pointer;
-
     border:#7F7F7F 1px solid; 
-color:#666666;
-
-
+    color:#666666;
     margin-top: 20px; 
-padding: 0 5px;
+    padding: 0 5px;
 }
 input{
     border:0px; 
@@ -51,8 +46,23 @@ input{
 tr{
     height: 30px;
 }
-#face_photo{
+.detail-box{
+    width: 600px;
+    margin: 0px auto;
+    padding-top: 80px;
+    overflow: hidden;
+}
+.photo{
     border:0px; 
+}
+.photo-img{
+    margin-right: 20px;
+    height: 190px;
+    float: left;
+}
+table span{
+    margin: 5px;
+    color: #FF8491;
 }
 </style>
 <body id="discussion">
@@ -68,18 +78,28 @@ tr{
 	<div class="ptl-sub">
 		<div class="ptl-sub-title"><h2>修改資料</h2></div>
         <div class="ptl-sub-content">
-        <!-- {帳號,密碼,暱稱,簡短介紹} -->
-        <form action="action_page.php">
+
+        <div class="detail-box">
+        <img src="" alt="" class="photo-img">
+        
         <table>
-            <tr><td>頭像</td>      <td><input type="file" name="face_photo" id="face_photo"></tr>
-            <tr><td>帳號</td>      <td><input type="text" name="id" disabled></td></tr>
-            <tr><td>密碼</td>      <td><input type="text" name="pw"></td></tr>
-            <tr><td>再一次密碼</td><td><input type="text" name="pw2"></td></tr>
-            <tr><td>暱稱</td>      <td><input type="text" name="name"></td></tr>
-            <tr><td>簡短介紹</td>  <td><input type="text" name="about"></td></tr>
+            <tr><td>頭像</td>
+            <td><form action="php/ajax_photo_upload.php" enctype="multipart/form-data" method="post" id="photo_form">
+                <input type="file" name="photo[]" class="photo"></form>
+            </td></tr>
+            
+            <form action="php/register.php" method="post" id="edit_form">
+                                       <input type="hidden" name="mode" value="updata">
+                                       <input type="hidden" name="id">
+            <tr class="hidden"><td>密碼</td>      <td><input type="password" name="pw"><span class="pw-log"></span></td></tr>
+            <tr class="hidden"><td>再一次密碼</td><td><input type="password" name="pw2"><span class="pw2-log"></span></td></tr>
+            <tr><td>暱稱</td>      <td><input type="text" name="name"><span class="name-log"></span></td></tr>
+            <tr><td>簡短介紹</td>  <td><input type="text" name="signature"></td></tr>
+            </form> 
         </table> 
-            <span class="submit">確定</span>
-        </form> 
+            <span id="submit">確定</span>
+      
+        </div>
 
 	    </div>
 	</div>
@@ -88,7 +108,59 @@ tr{
 </div>
 </div>
 
-
 <footer></footer>
 </body>
+
+<script>
+    $.get( "php/get_my_detail.php", function( data ) {
+
+        var json = JSON.parse(data);
+
+        $(".photo-img").attr("src",json.photo);
+        $('input[name=id]').val( json.id );
+        $('input[name=pw]').val( json.pw );
+        $('input[name=pw2]').val( json.pw );
+        $('input[name=name]').val( json.name );
+        $('input[name=signature]').val( json.signature );
+    });
+
+
+$(".photo").change(ajs_upload);   
+
+  
+function ajs_upload(){   
+
+  $("#photo_form").ajaxSubmit({   
+  type: 'POST',
+  data: {mode:"face"},
+  success: function(resp,st,xhr,$form){   
+
+    d = new Date();
+    $(".photo-img").attr("src",resp.split(",")[0]+"?"+d.getTime());
+  }   
+  });   
+}  
+
+
+
+$( "#submit" ).click(function(event) {
+
+if( !$('input[name=pw]').val() ) $('.pw-log').text("必填");
+else{ $('.pw-log').text("");
+
+if( $('input[name=pw]').val() != $('input[name=pw2]').val() ) $('.pw2-log').text("兩次密碼不一樣");
+else{ $('.pw2-log').text("");
+
+if( !$('input[name=name]').val() ) $('.name-log').text("必填");
+else $( "#edit_form" ).submit();
+
+}
+}
+});
+
+
+
+
+</script>
+
 </html> 

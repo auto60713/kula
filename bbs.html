@@ -13,6 +13,12 @@
         $( "header" ).load("view/header.html");
         $( "#menu"  ).load("view/menu.html");
         $( "footer" ).load("view/footer.html");
+
+        $.get( "php/login_check.php", function( data ) {
+
+          if(data != '') $('.ptl-wrapper').css("opacity",1);
+          else document.location.href="index.html";
+        });
     })
     </script>
 

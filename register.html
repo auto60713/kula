@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <title>Title of the document</title>
     <link rel=stylesheet type="text/css" href="css/main.css"> 
     <script src="js/jquery.js"></script>
@@ -13,18 +13,24 @@
         $( "header" ).load("view/header.html");
         $( "#menu"  ).load("view/menu.html");
         $( "footer" ).load("view/footer.html");
+
+        $.get( "php/login_check.php", function( data ) {
+
+          if(data == ''){
+
+              $('.ptl-wrapper').css("opacity",1);
+              $('li a').attr("href","#");
+          }
+          else document.location.href="bbs.html";
+        });
     })
     </script>
-
 </head>
 <style>
 .ptl-sub-title{
     background-image: url("img/category_list_long.gif");
 }
-
-
 .ptl-sub-content{
-    
     min-height: 400px;
 }
 form{
@@ -32,24 +38,26 @@ form{
     margin: 0px auto;
     padding-top: 100px;
 }
-.submit{
+.span-btn{
     display: inline-block;
     cursor: pointer;
-
     border:#7F7F7F 1px solid; 
-color:#666666;
-
-
+    color:#666666;
     margin-top: 20px; 
-padding: 0 5px;
+    padding: 0 5px;
 }
 input{
+  width: 230px;
     border:0px; 
     border-bottom:#7F7F7F 1px dotted; 
     margin-left: 10px;
 }
 tr{
     height: 30px;
+}
+table span{
+    margin: 5px;
+    color: #FF8491;
 }
 </style>
 <body id="discussion">
@@ -65,16 +73,16 @@ tr{
 	<div class="ptl-sub">
 		<div class="ptl-sub-title"><h2>註冊</h2></div>
         <div class="ptl-sub-content">
-        <!-- {帳號,密碼,暱稱,簡短介紹} -->
-        <form action="action_page.php">
+        <form action="php/register.php" method="post" id="register_form">
         <table>
-            <tr><td>帳號</td>      <td><input type="text" name="id"></td></tr>
-            <tr><td>密碼</td>      <td><input type="text" name="pw"></td></tr>
-            <tr><td>再一次密碼</td><td><input type="text" name="pw2"></td></tr>
-            <tr><td>暱稱</td>      <td><input type="text" name="name"></td></tr>
-            <tr><td>簡短介紹</td>  <td><input type="text" name="about"></td></tr>
+        <input type="hidden" name="mode" value="register">
+            <tr><td>帳號</td>      <td><input type="text" name="id"><span class="id-log"></span></td></tr>
+            <tr><td>密碼</td>      <td><input type="password" name="pw"><span class="pw-log"></span></td></tr>
+            <tr><td>再一次密碼</td><td><input type="password" name="pw2"><span class="pw2-log"></span></td></tr>
+            <tr><td>暱稱</td>      <td><input type="text" name="name"><span class="name-log"></span></td></tr>
+            <tr><td>簡短介紹</td>  <td><input type="text" name="signature"></td></tr>
         </table> 
-            <span class="submit">送出</span>
+            <span id="submit" class="span-btn">送出</span>
         </form> 
 
 	    </div>
@@ -87,4 +95,45 @@ tr{
 
 <footer></footer>
 </body>
+<script>
+
+$('input[name=id]').change(function(event) {
+
+  var id = $( this ).val();
+
+  $.ajax({
+      type: 'POST',
+      url: 'php/ajax_query.php',
+      data: {mode:1,id:id},
+      success: function (data) { 
+          if($.trim(data)=="repeat") $('.id-log').text("此ID已經被註冊"); 
+          else $('.id-log').text("");
+      }
+  });
+});
+
+
+$( "#submit" ).click(function(event) {
+
+
+if( !$('input[name=id]').val() ) $('.id-log').text("必填");
+else{ $('.id-log').text("");
+
+if( !$('input[name=pw]').val() ) $('.pw-log').text("必填");
+else{ $('.pw-log').text("");
+
+if( $('input[name=pw]').val() != $('input[name=pw2]').val() ) $('.pw2-log').text("兩次密碼不一樣");
+else{ $('.pw2-log').text("");
+
+if( !$('input[name=name]').val() ) $('.name-log').text("必填");
+else $( "#register_form" ).submit();
+
+}
+}
+}
+});
+
+
+
+</script>
 </html> 

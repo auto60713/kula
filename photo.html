@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <title>Title of the document</title>
     <link rel=stylesheet type="text/css" href="css/main.css"> 
-    <!-- https://www.otanko-nurse.jp/ -->
-    <!-- https://www.otanko-nurse.jp/onayami/ -->
     <script src="js/jquery.js"></script>
     <script src="js/jquery-migrate.js"></script>
     <!-- https://www.otanko-nurse.jp/ -->
@@ -15,6 +13,12 @@
         $( "header" ).load("view/header.html");
         $( "#menu"  ).load("view/menu.html");
         $( "footer" ).load("view/footer.html");
+
+        $.get( "php/login_check.php", function( data ) {
+
+          if(data != '') $('.ptl-wrapper').css("opacity",1);
+          else document.location.href="index.html";
+        });
     })
     </script>
 
@@ -25,6 +29,7 @@
 }
 .ptl-sub-content{ 
     min-height: 400px;
+    padding-bottom: 20px;
 }
 .photo-box{
 float: left;
@@ -74,39 +79,11 @@ background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.4));
 		<div class="ptl-sub-title"><h2>統神的相片</h2></div>
         <div class="ptl-sub-content">
            
-            <div class="photo-box unlast">
+            <!--div class="photo-box unlast">
                 <img src="test/ac03.jpg" alt="">
                 <div class="photo_title">千尋x在地下城尋求邂逅是否搞錯了什麼─赫斯緹雅</div>
-            </div>
-            <div class="photo-box unlast">
-                <img src="test/ac04.jpg" alt="">
-                <div class="photo_title">千尋x在地下城尋求邂逅是否搞錯了什麼─赫斯緹雅</div>
-            </div>
-            <div class="photo-box unlast">
-                <img src="test/ac05.jpg" alt="">
-                <div class="photo_title">千尋x在地下城尋求邂逅是否搞錯了什麼─赫斯緹雅</div>
-            </div>
-            <div class="photo-box unlast">
-                <img src="test/ac06.jpg" alt="">
-                <div class="photo_title">千尋x在地下城尋求邂逅是否搞錯了什麼─赫斯緹雅</div>
-            </div>
-            <div class="photo-box">
-                <img src="test/ac07.jpg" alt="">
-                <div class="photo_title">千尋x在地下城尋求邂逅是否搞錯了什麼─赫斯緹雅</div>
-            </div>
-
-            <div class="photo-box unlast">
-                <img src="test/ac11.jpg" alt="">
-                <div class="photo_title">我的電弧女巫才沒那麼可愛!</div>
-            </div>
-            <div class="photo-box unlast">
-                <img src="test/ac12.jpg" alt="">
-                <div class="photo_title">我的電弧女巫才沒那麼可愛!</div>
-            </div>
-            
-
-
-        <div style="clear: both;"></div> 
+            </div-->
+           
 	    </div>
 	</div>
 
@@ -123,6 +100,39 @@ $( ".photo-box img" ).load(function() {
   if($( this ).width() > $( this ).height()) $( this ).css( "height", "100%" );
   else $( this ).css( "width", "100%" );
 });
+
+
+
+//所有照片      
+    $.ajax({
+      type: 'POST',
+      url: 'php/ajax_query.php',
+      data:{mode:4},
+      success: function (data) { 
+
+          var photo = JSON.parse(data);
+
+          for (var i=0; i<photo.length; i++) {
+
+              var img = $('<img>').attr("src",photo[i].path).load(function() {
+                      if($( this ).width() > $( this ).height()) $( this ).css( "height", "100%" );
+                      else $( this ).css( "width", "100%" );
+                  }),
+                  title = $('<div>').addClass('photo_title').text(photo[i].title),
+                  box = $('<div>').addClass('photo-box').append(img,title);
+
+                  if(i%5!=4) box.addClass('unlast');
+            
+              $('.ptl-sub-content').append(box);
+
+          }
+          $('.ptl-sub-content').append($('<div>').css("clear","left"));
+
+      }
+    });
+
+
+
 
 </script>
 </html> 

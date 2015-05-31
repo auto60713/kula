@@ -18,6 +18,9 @@ input,textarea{
 header{
 	margin: 0px auto;
 }
+.hidden{
+    display: none;
+}
 #back_img{
 	position: absolute;
 	z-index: -1;
@@ -33,6 +36,7 @@ header{
     margin: 0px auto;
     display: block;
     padding-bottom: 100px;
+    opacity: 0;
 }
 .ptl-header-top{
     overflow: hidden;
