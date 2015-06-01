@@ -99,16 +99,16 @@
     padding: 0 5px;
 }
 .po-article{
+  cursor: pointer;
     height: 45px;
     overflow: hidden;
 }
 .po-article:hover{
     opacity: 0.7;
 }
-form{
-    float: left;
+#art_img_form{
+    display: inline-block;
 }
-
 </style>
 <body id="discussion">
 <img src="img/hdr_bg.jpg" alt="おたんこナース" id="back_img">
@@ -223,6 +223,13 @@ $.get( "php/get_my_detail.php", function( data ) {
 //所有文章
 $.get( "php/get_my_article.php", function( data ) {
 
+  if(data==0){
+
+      $('.ptl-main').append($('<div>').addClass('ptl-sub').append("沒有文章"));
+      $('.art-index').append($('<p>').addClass('albums').append("沒有文章"));
+  }
+  else{
+
     var json = JSON.parse(data);
 
     for (var i=0; i<json.length; i++) {
@@ -268,11 +275,8 @@ $.get( "php/get_my_article.php", function( data ) {
           
       }
     });
-
-
-
     }
-   
+  }
 });
 
 //上傳照片
@@ -308,6 +312,21 @@ function ajs_upload(){
 
 }
 
+//召喚燈箱
+$(document).delegate('.article_photo img', 'click', function(){ 
+
+  var light = $('<img>').attr("src",$( this ).attr("src")),
+      box = $('<div>').addClass('light-box').append(light);
+      $( "body" ).prepend(box);
+
+});
+
+//取消燈箱
+$(document).delegate('.light-box', 'click', function(){ 
+    $( this ).remove();
+});
+
+
 
 //發文
 $( ".submit" ).click(function(){
@@ -320,7 +339,7 @@ $( ".submit" ).click(function(){
       url: 'php/ajax_query.php',
       data:{mode:2,title:title,cont:cont,photo:all_photo_no},
       success: function (data) { 
-          
+          location.reload();
       }
       });
 });

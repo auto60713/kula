@@ -100,10 +100,10 @@ height: 54px;
     <div class="ptl-main">
 
 	<div class="ptl-sub">
-		<div class="ptl-sub-title"><h2>討論區</h2></div>
+		<div class="ptl-sub-title"><h2>交流區</h2></div>
         <div class="ptl-sub-content">
-            <div class="house">
 
+            <!--div class="house">
                <div class="house-cover"><img src="test/ac05.jpg"></div>
                <div class="house-header">       
                    <span class="house-host">統神</span>
@@ -116,40 +116,8 @@ height: 54px;
                我瘦的時候比現在看起來還MAN啊XD!!!!還好這件的腰是鬆緊帶我還能穿她!
                </div>
                <div style="clear:both;"></div>
-            </div>
+            </div-->
 
-            <div class="house">
-
-               <div class="house-cover"><img src="test/ac11.jpg"></div>
-               <div class="house-header">       
-                   <span class="house-host">統神</span>
-                   <span class="house-title">我的電弧女巫才沒那麼可愛!</span>
-                   <span class="house-date">2015-5-25更新</span>
-               </div>  
-               <div class="house-cont">盡在不言中W<br>
-               這是我14年前的衣服那是一個大家出角都是對角色有愛的年代<br>
-               所以也不太會考慮到適不適合這個問題多年以後<br>我就會想問自己為什麼覺得自己可以出少女啊XD!!!!<br>
-               我瘦的時候比現在看起來還MAN啊XD!!!!還好這件的腰是鬆緊帶我還能穿她!
-               </div>
-               <div style="clear:both;"></div>
-            </div>
-
-            <div class="house">
-
-               <div class="house-cover"><img src="test/ac12.jpg"></div>
-               <div class="house-header">       
-                   <span class="house-host">統神</span>
-                   <span class="house-title">我的電弧女巫才沒那麼可愛!</span>
-                   <span class="house-date">2015-5-25更新</span>
-               </div>  
-               <div class="house-cont">盡在不言中W<br>
-               這是我14年前的衣服那是一個大家出角都是對角色有愛的年代<br>
-               所以也不太會考慮到適不適合這個問題多年以後<br>我就會想問自己為什麼覺得自己可以出少女啊XD!!!!<br>
-               我瘦的時候比現在看起來還MAN啊XD!!!!還好這件的腰是鬆緊帶我還能穿她!
-               </div>
-               <div style="clear:both;"></div>
-            </div>
-         
 	    </div>
 	</div>
 
@@ -175,11 +143,38 @@ height: 54px;
 </body>
 <script type="text/javascript">
 
-//照片resize
-$( ".house-cover img" ).load(function() {
-  if($( this ).width() > $( this ).height()) $( this ).css( "height", "100%" );
-  else $( this ).css( "width", "100%" );
-});
+//列出大家的首頁
+$.get( "php/get_house.php", function( data ) {
 
+  if(data==0){
+
+      $('.ptl-main').append($('<div>').addClass('ptl-sub').append("目前還沒有人發表"));
+  }
+  else{
+
+    var json = JSON.parse(data);
+
+    for (var i=0; i<json.length; i++) {
+
+      var cover = $('<img>').attr("src",json[i].photo_path).load(function() {
+              if($( this ).width()>$( this ).height() && ($( this ).width()/$( this ).height())>=1.5) $( this ).css( "height", "100%" );
+              else $( this ).css( "width", "100%" );
+          }),
+          cover_box = $('<div>').addClass('house-cover').append(cover),
+
+          host  = $('<span>').addClass('house-host').text(json[i].name+" "),
+          title = $('<span>').addClass('house-title').text(json[i].title),
+          date  = $('<span>').addClass('house-date').text("最後發表："+json[i].datetime),
+          header = $('<div>').addClass('house-header').append(host,title,date),
+
+          cont = $('<div>').addClass('house-cont').html(json[i].cont),
+          clear = $('<div>').css("clear","left"),
+
+          house = $('<div>').addClass('house').append(cover_box,header,cont,house);
+
+          $('.ptl-sub-content').append(house);
+    }
+  }
+});
 </script>
 </html> 

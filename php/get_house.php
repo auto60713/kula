@@ -1,13 +1,13 @@
-<?php session_start(); 
+<?php 
 
-    //回傳個人文章
-
-    $id = $_SESSION['id'];
-    session_write_close();
+    //回傳交流區大家的首頁
 
     include("mysql_connect.php");
 
-    $sql = "SELECT * FROM article where author='".trim($id)."' ORDER BY no DESC";
+    $sql = "SELECT p.photo_path,m.name,a.title,a.cont,a.datetime "
+          ."FROM member m,article a,(SELECT * FROM photo LIMIT 1) p "
+          ."where a.no=m.last_art and p.article_no=a.no ORDER BY m.last_art DESC";
+
     $result = mysql_query($sql);
 
     if (mysql_num_rows($result) > 0) {

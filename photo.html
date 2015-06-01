@@ -64,6 +64,8 @@ font-weight: 500;
 box-sizing: border-box;
 background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.4));
 }
+
+
 </style>
 <body id="discussion">
 <img src="img/hdr_bg.jpg" alt="おたんこナース" id="back_img">
@@ -76,7 +78,7 @@ background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.4));
 <div class="ptl-content">
 
 	<div class="ptl-sub">
-		<div class="ptl-sub-title"><h2>統神的相片</h2></div>
+		<div class="ptl-sub-title"><h2></h2></div>
         <div class="ptl-sub-content">
            
             <!--div class="photo-box unlast">
@@ -87,6 +89,8 @@ background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.4));
 	    </div>
 	</div>
 
+
+
 </div>
 </div>
 
@@ -95,11 +99,37 @@ background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.4));
 </body>
 <script type="text/javascript">
 
+
+//召喚燈箱
+$(document).delegate('.photo-box img', 'click', function(){ 
+
+  var light = $('<img>').attr("src",$( this ).attr("src")),
+      box = $('<div>').addClass('light-box').append(light);
+      $( "body" ).prepend(box);
+
+});
+
+//取消燈箱
+$(document).delegate('.light-box', 'click', function(){ 
+    $( this ).remove();
+});
+
+
+
 //照片resize
 $( ".photo-box img" ).load(function() {
   if($( this ).width() > $( this ).height()) $( this ).css( "height", "100%" );
   else $( this ).css( "width", "100%" );
 });
+
+//個人資料
+$.get( "php/get_my_detail.php", function( data ) {
+
+    var json = JSON.parse(data);
+
+    $('.ptl-sub-title h2').text( json.name +"的相片" );
+});
+
 
 
 
@@ -109,6 +139,9 @@ $( ".photo-box img" ).load(function() {
       url: 'php/ajax_query.php',
       data:{mode:4},
       success: function (data) { 
+
+        if(data==0) $('.ptl-sub-content').text("沒有相片");
+        else{
 
           var photo = JSON.parse(data);
 
@@ -127,7 +160,7 @@ $( ".photo-box img" ).load(function() {
 
           }
           $('.ptl-sub-content').append($('<div>').css("clear","left"));
-
+        }
       }
     });
 
