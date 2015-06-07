@@ -18,6 +18,9 @@ input,textarea{
 header{
 	margin: 0px auto;
 }
+a{
+    text-decoration: none;
+}
 .hidden{
     display: none;
 }
@@ -39,8 +42,10 @@ header{
   z-index: 20;
 }
 .light-box img{
-  height: 70%;
-  margin: 7% auto;
+  position: relative;
+  height: 80%;
+  top: 10%;
+  margin: 0 auto;
   display: block;
 }
 
@@ -139,19 +144,7 @@ footer{
     text-align: center;
     background-color: #FFFFFF;
 }
-.albums{
-     white-space: nowrap; 
-     width: 100%;
-     overflow: hidden;
-         text-overflow: ellipsis; 
-}
-.albums a{
-    color: #5FABBF;
-    text-decoration: none;
-}
-.albums a:hover{
-    color: #80D5EB;
-}
+
 .ptl-under{
 	position: relative;
     background-color: #FFFFFF;

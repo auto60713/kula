@@ -4,9 +4,9 @@
 
     include("mysql_connect.php");
 
-    $sql = "SELECT p.photo_path,m.name,a.title,a.cont,a.datetime "
-          ."FROM member m,article a,(SELECT * FROM photo LIMIT 1) p "
-          ."where a.no=m.last_art and p.article_no=a.no ORDER BY m.last_art DESC";
+    $sql = "SELECT m.photo,m.id,m.name,a.title,a.cont,a.datetime "
+          ."FROM member m,article a "
+          ."where a.no=m.last_art ORDER BY m.last_art DESC";
 
     $result = mysql_query($sql);
 

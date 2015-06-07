@@ -11,7 +11,6 @@
     $result = mysql_query($sql);
     $row = mysql_fetch_assoc($result);
 
-    if($row['photo']==null) $row['photo']='user/default.png';
     echo json_encode($row);
 
 ?>

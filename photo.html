@@ -39,13 +39,18 @@ overflow: hidden;
     margin-top: 10px;
     text-align: center;
 }
-.unlast{
-        margin-right: 10px;
 
+.photo-box:hover{
+ opacity: 0.8;
 }
 .photo-box img{
 float: left;
 }
+.unlast{
+        margin-right: 10px;
+
+}
+
 .photo_title{
         position: absolute;
 
@@ -148,8 +153,11 @@ $.get( "php/get_my_detail.php", function( data ) {
           for (var i=0; i<photo.length; i++) {
 
               var img = $('<img>').attr("src",photo[i].path).load(function() {
-                      if($( this ).width() > $( this ).height()) $( this ).css( "height", "100%" );
-                      else $( this ).css( "width", "100%" );
+                  var width=$(this).width(),height=$(this).height();
+                      if(width > height){
+                           $( this ).css({"height":"100%","margin-left":-((width/(height/183))-183)/2});
+                      }
+                      else $( this ).css({"width":"100%","margin-top":-((height/(width/183))-183)/2});
                   }),
                   title = $('<div>').addClass('photo_title').text(photo[i].title),
                   box = $('<div>').addClass('photo-box').append(img,title);

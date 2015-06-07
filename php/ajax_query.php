@@ -82,6 +82,8 @@ function creat_article(){
 
         $sql = "update photo set article_no='".$article."',article_title='".$_POST['title']."' where no in (".$photo.")";
         mysql_query($sql);
+        $sql = "update member set last_art='".$article."' where id = '".$_SESSION['id']."'";
+        mysql_query($sql);
     }
 
 }

@@ -52,16 +52,21 @@ input{
 .house{
     border-bottom:#BFBFBF 1px solid; 
     overflow: hidden;
+    color: #686868;
+}
+.house:hover{
+background-color: #EEF4F9;
 }
 .house-header{
-    margin-top: 6px;
+    margin-top: 8px;
 }
 /* 需要用JS 調整比例 */
 .house-cover{
 float: left;
-width: 150px;
+width: 100px;
  height: 100px;
-margin:5px; 
+margin:5px 5px 5px 0px; 
+
 overflow: hidden;
 }
 
@@ -76,6 +81,8 @@ overflow: hidden;
     color: #E881AF;
 }
 .house-date{
+  display: inline-block;
+  width: 202px;
     float: right;
 }
 .house-cont{
@@ -156,9 +163,10 @@ $.get( "php/get_house.php", function( data ) {
 
     for (var i=0; i<json.length; i++) {
 
-      var cover = $('<img>').attr("src",json[i].photo_path).load(function() {
-              if($( this ).width()>$( this ).height() && ($( this ).width()/$( this ).height())>=1.5) $( this ).css( "height", "100%" );
-              else $( this ).css( "width", "100%" );
+      var cover = $('<img>').attr("src",json[i].photo).load(function() {
+          var width=$(this).width(),height=$(this).height();
+              if(width>height) $(this).css({"height":"100%","margin-left":-((width/(height/100))-100)/2});
+              else $(this).css({"width":"100%","margin-top":-((height/(width/100))-100)/2});
           }),
           cover_box = $('<div>').addClass('house-cover').append(cover),
 
@@ -170,9 +178,10 @@ $.get( "php/get_house.php", function( data ) {
           cont = $('<div>').addClass('house-cont').html(json[i].cont),
           clear = $('<div>').css("clear","left"),
 
-          house = $('<div>').addClass('house').append(cover_box,header,cont,house);
+          house = $('<div>').addClass('house').append(cover_box,header,cont),
+          h_link = $('<a>').attr("href","profile.html?id="+json[i].id).append(house);
 
-          $('.ptl-sub-content').append(house);
+          $('.ptl-sub-content').append(h_link);
     }
   }
 });

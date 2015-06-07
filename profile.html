@@ -59,6 +59,13 @@
     color: #6BBBD0;
     padding-bottom: 10px;
 }
+.article_date a{
+ color: #5FABBF;
+}
+.article_date a:hover{
+ color: #80D5EB;
+}
+ 
 .article_photo{
     float: left;
     width: 235px;
@@ -66,6 +73,12 @@
     overflow: hidden;
     text-align: center;
     margin-top: 10px;
+}
+.article_photo_big{
+    max-width: 45%;
+    margin-top: 10px;
+    margin-right: 10px;
+    float: left;
 }
 .article_photo_min{
     display: inline-block;
@@ -81,7 +94,19 @@
   white-space: nowrap;
   padding: 0 10px;
 }
-
+.albums{
+     white-space: nowrap; 
+     width: 100%;
+     overflow: hidden;
+         text-overflow: ellipsis; 
+}
+.albums a{
+    color: #5FABBF;
+    text-decoration: none;
+}
+.albums a:hover{
+    color: #80D5EB;
+}
 .po-echo{
     line-height: 140px;
 }
@@ -201,8 +226,11 @@ var all_photo_no = "";
 
 //照片resize
 $( ".face-photo img" ).load(function() {
-  if($( this ).width() > $( this ).height()) $( this ).css( "height", "100%" );
-  else $( this ).css( "width", "100%" );
+  var width=$(this).width(),height=$(this).height();
+  if(width > height){
+       $( this ).css({"height":"100%","margin-left":-((width/(height/140))-140)/2});
+  }
+  else $( this ).css({"width":"100%","margin-top":-((height/(width/140))-140)/2});
 });
 
 //發文展開
@@ -220,8 +248,19 @@ $.get( "php/get_my_detail.php", function( data ) {
     $('.my-signature').text( json.signature );
 });
 
-//所有文章
-$.get( "php/get_my_article.php", function( data ) {
+
+
+
+var art_no = "",view="";
+//如果有文章參數
+if (location.search.indexOf("art=") != -1) {
+    art_no = location.search.split("art=")[1];
+    art_no = "?art="+art_no.split("&")[0];
+    view = "detail";
+}
+//文章
+var php_file = "php/get_my_article.php"+art_no;
+$.get( php_file , function( data ) {
 
   if(data==0){
 
@@ -235,8 +274,9 @@ $.get( "php/get_my_article.php", function( data ) {
     for (var i=0; i<json.length; i++) {
 
       var title = $('<h2>').text(json[i].title),
+          t_link = $('<a>').attr('href','?art='+json[i].no).append(title),
           datetime = $('<span>').text(json[i].datetime),
-          article_data = $('<div>').addClass('article_date').append(title,datetime),
+          article_data = $('<div>').addClass('article_date').append(t_link,datetime),
           cont = $('<p>').html(json[i].cont),
 
           post = $('<div>').addClass('ptl-sub this-article').append(article_data,cont);
@@ -258,17 +298,23 @@ $.get( "php/get_my_article.php", function( data ) {
 
           for (var i=0; i<photo.length; i++) {
 
-              if(i==3) break;
-
-              var img = $('<img>').attr("src",photo[i].photo_path).load(function(){
-                      if($( this ).width() > $( this ).height()) $( this ).css( "height", "100%" );
-                      else $( this ).css( "width", "100%" );
-                  }),
-                  photo_box = $('<div>').addClass('article_photo').append(img);
-              if(i!=2) photo_box.addClass('unlast');
-
+              if(view=="detail"){
+                  var photo_box = $('<img>').attr("src",photo[i].photo_path).addClass('article_photo_big');
+              }
+              else{
+                  if(i==3) break;
+                  var img = $('<img>').attr("src",photo[i].photo_path).load(function(){
+                          var width=$(this).width(),height=$(this).height();
+                          if(width > height){
+                               $( this ).css({"height":"100%","margin-left":-((width/(height/235))-235)/2});
+                          } 
+                          else $( this ).css({"width":"100%","margin-top":-((height/(width/235))-235)/2});
+                      });
+                      photo_box = $('<div>').addClass('article_photo').append(img);
+                  if(i!=2) photo_box.addClass('unlast');
+              }
+          
               $('.this-article').append(photo_box);
-
           }
           $('.this-article').append($('<div>').css("clear","left"));
           $('.this-article').removeClass('this-article');
@@ -313,7 +359,7 @@ function ajs_upload(){
 }
 
 //召喚燈箱
-$(document).delegate('.article_photo img', 'click', function(){ 
+$(document).delegate('.article_photo img,.article_photo_big', 'click', function(){ 
 
   var light = $('<img>').attr("src",$( this ).attr("src")),
       box = $('<div>').addClass('light-box').append(light);

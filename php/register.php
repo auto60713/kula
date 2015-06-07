@@ -24,7 +24,7 @@ if($id != null && $pw != null && $name != null){
     //註冊
     if($_POST['mode']=="register"){
 	
-        $sql = "insert into member (id, pw, name, signature) values ('$id', '$pw', '$name', '$signature')";
+        $sql = "insert into member (id, pw, name, signature, photo) values ('$id', '$pw', '$name', '$signature', 'user/default.png')";
         if(mysql_query($sql)){
 
             $_SESSION['id'] = $id;

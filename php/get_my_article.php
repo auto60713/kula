@@ -1,13 +1,21 @@
 <?php session_start(); 
 
-    //回傳個人文章
 
+if( isset($_GET['art']) ){
+    //單篇文章
+    $no = $_GET['art'];
+    $sql = "SELECT * FROM article where no='".trim($no)."'";
+}
+else{
+    //回傳個人所有文章
     $id = $_SESSION['id'];
+    $sql = "SELECT * FROM article where author='".trim($id)."' ORDER BY no DESC";
+}
+
     session_write_close();
 
     include("mysql_connect.php");
 
-    $sql = "SELECT * FROM article where author='".trim($id)."' ORDER BY no DESC";
     $result = mysql_query($sql);
 
     if (mysql_num_rows($result) > 0) {
